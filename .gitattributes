@@ -1,0 +1,80 @@
+############################################
+# General text handling
+############################################
+* text=auto
+
+############################################
+# Python files
+############################################
+*.py text eol=lf
+*.txt text eol=lf
+*.md  text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+############################################
+# Frontend files
+############################################
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+
+############################################
+# Electron / Node
+############################################
+package.json text eol=lf
+package-lock.json text eol=lf
+*.ts text eol=lf
+
+############################################
+# Shell / PowerShell scripts
+############################################
+*.sh text eol=lf
+*.ps1 text eol=crlf
+
+############################################
+# Binary files (DO NOT MODIFY)
+############################################
+*.exe binary
+*.dll binary
+*.so  binary
+*.dylib binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.zip binary
+*.7z  binary
+*.pdf binary
+
+############################################
+# Python virtual environments
+############################################
+venv/** linguist-vendored
+*/venv/** linguist-vendored
+
+############################################
+# Node modules
+############################################
+node_modules/** linguist-vendored
+
+############################################
+# Build / dist artifacts
+############################################
+dist/** linguist-vendored
+build/** linguist-vendored
+*.spec linguist-generated
+
+############################################
+# Database files
+############################################
+*.db binary
+
+############################################
+# GitHub language stats (clean repo)
+############################################
+*.exe linguist-vendored
+*.zip linguist-vendored
