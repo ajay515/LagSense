@@ -198,14 +198,9 @@
       });
 
     // Download function - WORKING VERSION
-    function downloadLagSense() {
-      const link = document.createElement('a');
-      link.href = '/downloads/LagSense-Setup-1.0.0.exe';
-      link.download = 'LagSense-Setup-1.0.0.exe';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+   function downloadLagSense() {
+  window.location.href = 'https://github.com/ajay515/lagsense/releases/download/v1.0.0/LagSense-Setup-1.0.0.exe';
+}
   </script>
 
 </body>

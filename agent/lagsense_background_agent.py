@@ -13,7 +13,7 @@ import json
 import os
 from pathlib import Path
 
-API = "http://127.0.0.1:8000"
+API = "https://lagsense-api.onrender.com"
 USER_ID = 1
 
 # Notification tracking (don't spam)
