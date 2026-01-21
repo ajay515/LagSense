@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register · LagSense</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+  <!-- FLOATING GAME NAMES BACKGROUND -->
+  <div class="game-float-layer">
+    <span class="game-float g1">VALORANT</span>
+    <span class="game-float g2">CS2</span>
+    <span class="game-float g3">DOTA 2</span>
+    <span class="game-float g4">FORTNITE</span>
+  </div>
+
+  <!-- BACK BUTTON -->
+  <a href="login.html" class="auth-back">← Back</a>
+
+  <!-- REGISTER CARD -->
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <h1>Create your account</h1>
+      <p class="auth-sub">
+        Join LagSense and stop playing blind.
+      </p>
+
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+
+      <button class="btn primary auth-btn" onclick="register()">
+        Create Account
+      </button>
+
+      <p id="message" class="auth-message"></p>
+
+      <p class="auth-footer">
+        Already have an account?
+        <a href="login.html">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+psutil==5.9.8
+requests==2.31.0
+pywin32==311
+python-dotenv==1.0.0
+numpy==2.3.5
+win10toast==0.9

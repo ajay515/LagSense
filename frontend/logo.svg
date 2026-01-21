@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  width="48"
+  height="48"
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Outer Ring -->
+  <circle cx="50" cy="50" r="46"
+          fill="#020617"
+          stroke="#38bdf8"
+          stroke-width="4"/>
+
+  <!-- Signal Dots -->
+  <circle cx="30" cy="50" r="6" fill="#38bdf8">
+    <animate attributeName="opacity"
+             values="0.4;1;0.4"
+             dur="1.8s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <circle cx="50" cy="50" r="6" fill="#38bdf8">
+    <animate attributeName="opacity"
+             values="0.4;1;0.4"
+             dur="1.8s"
+             begin="0.3s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <circle cx="70" cy="50" r="6" fill="#38bdf8">
+    <animate attributeName="opacity"
+             values="0.4;1;0.4"
+             dur="1.8s"
+             begin="0.6s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Lag Spike -->
+  <path d="M50 20 L58 50 L50 46 L42 80"
+        fill="none"
+        stroke="#ef4444"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        filter="url(#glow)">
+    <animate attributeName="opacity"
+             values="0;1;0"
+             dur="3.5s"
+             repeatCount="indefinite"/>
+  </path>
+
+</svg>

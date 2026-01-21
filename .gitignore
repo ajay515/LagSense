@@ -1,0 +1,17 @@
+# ===== Node / Electron =====
+node_modules/
+electron/node_modules/
+dist/
+build/
+frontend/downloads/
+*.exe
+
+# ===== Python =====
+venv/
+__pycache__/
+*.pyc
+.env
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
