@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000";
+const API = "https://lagsense-api.onrender.com";
 
 async function register() {
   const email = document.getElementById("email").value;
