@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000";
+const API = "https://lagsense-api.onrender.com";
 const userId = localStorage.getItem("user_id") || 1;
 const userEmail = localStorage.getItem("user_email") || "";
 
