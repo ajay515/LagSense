@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LagSense · Diagnose Lag</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* VIDEO BACKGROUND */
+    #video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    #video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* DARK OVERLAY */
+    #video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: -1;
+    }
+
+    /* Download button styling */
+    .download-btn {
+      background: linear-gradient(90deg, #10b981, #059669);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(90deg, #059669, #047857);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(16,185,129,0.6);
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+    }
+
+    .download-icon {
+      font-size: 20px;
+    }
+
+    /* Download progress */
+    #download-progress {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      color: #10b981;
+      font-size: 14px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(16,185,129,0.3);
+      border-radius: 4px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #10b981;
+      width: 0%;
+      transition: width 0.2s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- VIDEO BACKGROUND -->
+  <div id="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="./assets/bg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div id="video-overlay"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar constrained">
+    <h2 class="logo">LagSense</h2>
+    <div class="nav-actions">
+      <a href="login.html" class="btn ghost">Login</a>
+      <a href="register.html" class="btn primary">Register</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content constrained">
+      <h1>
+        Stop guessing.<br>
+        <span>Understand your lag.</span>
+      </h1>
+
+      <p class="hero-text">
+        LagSense helps gamers detect, explain, and track network lag phases
+        so you know exactly what's ruining your game.
+      </p>
+
+      <div class="hero-actions">
+        <a href="register.html" class="btn primary big">Get Started</a>
+        <a href="#about" class="btn ghost big">Learn More</a>
+        <button class="download-btn big" id="downloadBtn" onclick="downloadLagSense()">
+          <span class="download-icon">⬇️</span>
+          Download LagSense for Windows
+        </button>
+      </div>
+
+      <div id="download-progress">
+        <span id="progressText">Downloading: 0%</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- USER COUNT -->
+      <div class="user-stats">
+        <span id="userCount">–</span> gamers already using LagSense
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="constrained">
+      <h2>What is LagSense?</h2>
+      <p class="section-text">
+        LagSense is a diagnostic tool for gamers that focuses on
+        <b>why lag happens</b>, not just how to reduce ping.
+      </p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="constrained">
+      <h2>Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Real-time Monitoring</div>
+          <div class="feature-text">Monitor ping, jitter, and packet loss in real-time</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <div class="feature-title">Multi-Game Support</div>
+          <div class="feature-text">Works with Valorant, CS2, Dota 2, Fortnite, Discord</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <div class="feature-title">Smart Notifications</div>
+          <div class="feature-text">Get alerted only when issues occur (smart throttling)</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">Session Analysis</div>
+          <div class="feature-text">View detailed reports of each gaming session</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD SCRIPT -->
+  <script>
+    const API = "http://127.0.0.1:8000";
+
+    // Load user count
+    fetch(`${API}/stats/users`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("userCount").innerText = data.users || "100+";
+      })
+      .catch(() => {
+        document.getElementById("userCount").innerText = "100+";
+      });
+
+    // Download function - WORKING VERSION
+    function downloadLagSense() {
+      const link = document.createElement('a');
+      link.href = '/downloads/LagSense-Setup-1.0.0.exe';
+      link.download = 'LagSense-Setup-1.0.0.exe';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+
+</body>
+</html>
