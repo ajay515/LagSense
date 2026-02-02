@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile · LagSense</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- BACK TO DASHBOARD -->
+  <a href="dashboard.html" class="auth-back">← Back</a>
+
+  <div class="auth-wrapper">
+
+    <div class="auth-card">
+      <h1>Edit Profile</h1>
+      <p class="auth-sub">
+        Update your account details.
+      </p>
+
+      <input type="text" id="displayName" placeholder="Display Name">
+      <input type="password" id="newPassword" placeholder="New Password (leave empty to keep current)">
+
+      <button class="btn primary auth-btn" onclick="updateProfile()">
+        Save Changes
+      </button>
+
+      <p id="message" class="auth-message"></p>
+    </div>
+
+  </div>
+
+  <script>
+    const API = "http://127.0.0.1:8000";
+
+    // Load current profile data
+    function loadProfile() {
+      const email = localStorage.getItem("user_email");
+      if (email) {
+        const displayName = email.split("@")[0];
+        document.getElementById("displayName").value = displayName;
+      }
+    }
+
+    // Update profile function
+    async function updateProfile() {
+      const displayName = document.getElementById("displayName").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const userId = localStorage.getItem("user_id");
+      const msg = document.getElementById("message");
+
+      msg.innerText = "";
+
+      if (!displayName) {
+        msg.innerText = "Display name cannot be empty";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}/profile/${userId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            display_name: displayName,
+            password: newPassword || null
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          msg.innerText = "Profile updated successfully!";
+          msg.style.color = "#10b981";
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 2000);
+        } else {
+          msg.innerText = data.message || "Update failed";
+        }
+      } catch (err) {
+        msg.innerText = "Update error: " + err.message;
+        console.error("Update error:", err);
+      }
+    }
+
+    // Load profile on page load
+    loadProfile();
+  </script>
+
+</body>
+</html>
