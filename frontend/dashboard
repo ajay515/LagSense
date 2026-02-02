@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LagSense Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+  <script defer src="dashboard.js"></script>
+</head>
+
+<body class="dashboard-page">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div>
+      <div class="brand-title">LagSense</div>
+      <div class="brand-sub">Live Network Diagnostics</div>
+    </div>
+
+    <div class="user-area">
+      <span id="username">User</span>
+      <a href="settings.html" class="settings-btn">⚙ Settings</a>
+      <button class="logout-btn" onclick="logout()">↲ Logout</button>
+    </div>
+  </header>
+
+  <!-- DASHBOARD -->
+  <main class="dashboard constrained">
+
+    <!-- METRICS -->
+    <section class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Ping</div>
+        <div class="metric-value" id="ping">--</div>
+        <div class="metric-unit">ms</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Jitter</div>
+        <div class="metric-value" id="jitter">--</div>
+        <div class="metric-unit">ms</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Packet Loss</div>
+        <div class="metric-value" id="packetLoss">--</div>
+        <div class="metric-unit">%</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Health</div>
+        <div class="metric-value" id="healthScore">--</div>
+        <div class="metric-unit">%</div>
+      </div>
+    </section>
+
+    <!-- GAME & SESSION -->
+    <section class="panel">
+      <h3>Game & Session</h3>
+
+      <div class="form-row">
+        <label>Detected Game</label>
+        <select id="gameSelect"></select>
+      </div>
+
+      <div class="form-row">
+        <label>Sessions</label>
+        <select id="sessionSelect"></select>
+      </div>
+
+      <div class="panel-actions">
+        <button class="btn ghost" onclick="loadSessions()">Load Sessions</button>
+        <button class="btn primary" onclick="analyzeSession()">Analyze</button>
+      </div>
+    </section>
+
+    <!-- SESSION VERDICT -->
+    <section class="panel">
+      <h3>Session Verdict</h3>
+      <div class="verdict-text" id="verdict">Waiting for analysis…</div>
+    </section>
+
+    <!-- ROUTING -->
+    <section class="panel">
+      <h3>Network Optimization</h3>
+      <div class="optimizer-text" id="optimizer">–</div>
+    </section>
+
+    <!-- POSSIBLE CAUSES -->
+    <section class="panel">
+      <h3>Possible Causes of Lag</h3>
+      <ul class="insights-list" id="causes">
+        <li>No data yet</li>
+      </ul>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="panel">
+      <h3>Network Timeline</h3>
+      <div style="position: relative; height: 300px;">
+        <canvas id="timelineChart"></canvas>
+      </div>
+    </section>
+
+    <!-- STATISTICS -->
+    <section class="panel">
+      <h3>Overall Statistics</h3>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Total Sessions</div>
+          <div class="stat-value" id="totalSessions">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Best Game</div>
+          <div class="stat-value" id="bestGame">N/A</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Worst Game</div>
+          <div class="stat-value" id="worstGame">N/A</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Total Playtime</div>
+          <div class="stat-value" id="totalPlaytime">0h</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
